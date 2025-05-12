@@ -155,7 +155,7 @@ function App() {
 
             <div className="flex space-x-8 mb-12">
               <a
-                href="https://github.com "
+                href="https://github.com/pipolokaos1"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:scale-110 transition-transform duration-300 hover:text-gray-300"
