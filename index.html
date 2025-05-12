@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React App</title>
+    <link rel="icon" href="/favicon.ico" />
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        #root { height: 100vh; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel" data-type="module">
+        fetch('/app.jsx')
+            .then(response => response.text())
+            .then(code => {
+                const wrappedCode = `
+                    ${code}
+                    const root = ReactDOM.createRoot(document.getElementById('root'));
+                    root.render(React.createElement(App));
+                `;
+                const transformed = Babel.transform(wrappedCode, {
+                    presets: ['react'],
+                }).code;
+                eval(transformed);
+            });
+    </script>
+</body>
+</html>
